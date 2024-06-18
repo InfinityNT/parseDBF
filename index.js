@@ -1,5 +1,6 @@
-var createDecoder = require('./decoder');
-function dbfHeader(data) {
+import { createDecoder } from './decoder.js';
+
+export function dbfHeader(data) {
   var out = {};
   out.lastUpdated = new Date(data.readUInt8(1) + 1900, data.readUInt8(2), data.readUInt8(3));
   out.records = data.readUInt32LE(4);
@@ -62,7 +63,7 @@ function parseRow(buffer, offset, rowHeaders, decoder) {
   return out;
 }
 
-module.exports = function(buffer, encoding) {
+export default function(buffer, encoding) {
   var decoder = createDecoder(encoding);
   var header = dbfHeader(buffer);
   var rowHeaders = dbfRowHeader(buffer, header.headerLen - 1, decoder);
@@ -77,4 +78,4 @@ module.exports = function(buffer, encoding) {
     records--;
   }
   return out;
-};
+}

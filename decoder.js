@@ -1,12 +1,13 @@
-var iconv = require('iconv-lite');
-var StringDecoder = require('string_decoder').StringDecoder;
+import iconv from 'iconv-lite';
+import { StringDecoder } from 'string_decoder'
+
 function defaultDecoder(data) {
   var decoder = new StringDecoder();
   var out = decoder.write(data) + decoder.end();
   return out.replace(/\0/g, '').trim();
 }
-module.exports = createDecoder;
-function createDecoder(encoding) {
+
+export function createDecoder(encoding) {
   if (!encoding) {
     return defaultDecoder;
   }

@@ -1,7 +1,7 @@
-var fs = require('fs');
-var basic = require('./data/watershed');
-var char11 = require('./data/watershed-11chars');
-var specialChar = require('./data/watershed-specialCharacters');
+import fs from 'fs';
+import * as basic from './data/watershed.cjs'
+import * as char11 from './data/watershed-11chars.cjs'
+import * as specialChar from './data/watershed-specialCharacters.cjs'
 var utf = [
   {
     field: '💩'
@@ -10,11 +10,11 @@ var utf = [
     field: 'Hněvošický háj'
   }
 ]
-var dbf = require('../');
-require('chai').should();
-function toArrayBuffer(buffer) {
-    return buffer;
-}
+
+import dbf from '../index.js'
+import pkg from 'chai';
+const should = pkg.should();
+
 describe('dbf',function(){
 	it('should work',function(done){
 		fs.readFile('./test/data/watershed.dbf',function(err,data){
@@ -25,7 +25,7 @@ describe('dbf',function(){
 			done();
 		});
 	});
-  it('should handle 11 charicter field names',function(done){
+  it('should handle 11 character field names',function(done){
 		fs.readFile('./test/data/watershed-11chars.dbf',function(err,data){
 			if(err){
 				return done(err);
