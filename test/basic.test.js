@@ -11,7 +11,7 @@ var utf = [
   }
 ]
 
-import dbf from '../index.js'
+import { parseDbf } from '../index.js';
 import pkg from 'chai';
 const should = pkg.should();
 
@@ -21,7 +21,7 @@ describe('dbf',function(){
 			if(err){
 				return done(err);
 			}
-			dbf(data).should.deep.equal(basic);
+			parseDbf(data).should.deep.equal(basic);
 			done();
 		});
 	});
@@ -30,7 +30,7 @@ describe('dbf',function(){
 			if(err){
 				return done(err);
 			}
-			dbf(data).should.deep.equal(char11);
+			parseDbf(data).should.deep.equal(char11);
 			done();
 		});
 	});
@@ -39,7 +39,7 @@ describe('dbf',function(){
       if(err){
         return done(err);
       }
-      dbf(data).should.deep.equal(specialChar);
+      parseDbf(data).should.deep.equal(specialChar);
       done();
     });
   });
@@ -48,7 +48,7 @@ describe('dbf',function(){
       if(err){
         return done(err);
       }
-      dbf(data).should.deep.equal([{}, {}]);
+      parseDbf(data).should.deep.equal([{}, {}]);
       done();
     });
   });
@@ -57,7 +57,7 @@ describe('dbf',function(){
       if(err){
         return done(err);
       }
-      dbf(data).should.deep.equal(utf);
+      parseDbf(data).should.deep.equal(utf);
       dbf(data, 'UTF-8').should.deep.equal(utf);
       done();
     });
@@ -78,7 +78,7 @@ describe('dbf',function(){
       if(err){
         return done(err);
       }
-      dbf(data)[1].should.not.deep.equal(utf[1]);
+      parseDbf(data)[1].should.not.deep.equal(utf[1]);
       dbf(data, '1250')[1].should.deep.equal(utf[1]);
       dbf(data, 'ANSI 1250')[1].should.deep.equal(utf[1]);
       dbf(data, 'windows-1250')[1].should.deep.equal(utf[1]);
